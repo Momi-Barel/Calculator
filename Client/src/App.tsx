@@ -27,78 +27,77 @@ export default function App()  {
     localStorage.setItem("listExerciseCalculator", JSON.stringify(listExerciseCalculator));
   }
 
-      const CalculateApi = async (operator:string) => {// get result from server
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' ,'accept': 'text/plain'},
-          body: JSON.stringify({ "number1": number1,
-          "number2": number2, "operator": operator })
-        };
+  const CalculateApi = async (operator:string) => {// get result from server
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' ,'accept': 'text/plain'},
+      body: JSON.stringify({ "number1": number1,
+      "number2": number2, "operator": operator })
+    };
     
-        const response = await fetch('https://localhost:7282/Calculator', requestOptions);
-        const responseData = await response.json();
-        if (responseData) {
-          setMessageError("");
-          setResult(responseData);
-          addToList(responseData); 
-        }
-        else {
-          setMessageError("This exercise cannot be calculated");
-        }
-      }
+    const response = await fetch('https://localhost:7282/Calculator', requestOptions);
+    const responseData = await response.json();
+    if (responseData) {
+      setMessageError("");
+      setResult(responseData);
+      addToList(responseData); 
+    }
+    else {
+      setMessageError("This exercise cannot be calculated");
+    }
+  }
    
-      const addToList = (calcRes:number) => {// add exercise calculator to calculation history
-        if (updateItemInList) {
-          listExerciseCalculator[updateIndexInList] = {
-            number1: number1,
-            number2: number2,
-            operator: operator,
-            result: calcRes.toString(),
-          }
-          setUpdateIndexInList(0);
-          setUpdateItemInList(false);
-        } 
-        else if (listExerciseCalculator.length <= 2) {
-          listExerciseCalculator.push({
-            number1: number1,
-            number2: number2,
-            operator: operator,
-            result: calcRes.toString(),
-          })
-          setUpdatedList(listExerciseCalculator);
-        } 
-        else {
-          listExerciseCalculator.shift();
-          listExerciseCalculator.push({
-            number1: number1,
-            number2: number2,
-            operator: operator,
-            result: calcRes.toString(),
-          });
-        }
-        localStorage.setItem(
-          'listExerciseCalculator',
-          JSON.stringify(listExerciseCalculator),
-        )
-        showResult(calcRes);
+  const addToList = (calcRes:number) => {// add exercise calculator to calculation history
+    if (updateItemInList) {
+      listExerciseCalculator[updateIndexInList] = {
+        number1: number1,
+        number2: number2,
+        operator: operator,
+        result: calcRes.toString(),
       }
+      setUpdateIndexInList(0);
+      setUpdateItemInList(false);
+    } 
+    else if (listExerciseCalculator.length <= 2) {
+      listExerciseCalculator.push({
+        number1: number1,
+        number2: number2,
+        operator: operator,
+        result: calcRes.toString(),
+      })
+      setUpdatedList(listExerciseCalculator);
+    } 
+    else {
+      listExerciseCalculator.shift();
+      listExerciseCalculator.push({
+        number1: number1,
+        number2: number2,
+        operator: operator,
+        result: calcRes.toString(),
+      });
+    }
+    localStorage.setItem(
+      'listExerciseCalculator',
+      JSON.stringify(listExerciseCalculator),
+    )
+    showResult(calcRes);
+  }
 
-      const showResult = (calcRes: number) => {
-        setResult(calcRes.toString());
-      }
+  const showResult = (calcRes: number) => {
+    setResult(calcRes.toString());
+  }
 
-      const resetNumbers = () => {
-        setNumber1(0);
-        setNumber2(0);
-        setResult("");
-      }
+  const resetNumbers = () => {
+    setNumber1(0);
+    setNumber2(0);
+    setResult("");
+  }
 
-      const ClearHistory = () => {// clear all calculation history
-        localStorage.clear();
-        setUpdatedList([]);
-      }
+  const ClearHistory = () => {// clear all calculation history
+    localStorage.clear();
+    setUpdatedList([]);
+  }
   return (
-    
     <div className="App">
       <div>
         <input className="inputStyle" type="number" value={number1} onChange={(e) => setNumber1(e.target.valueAsNumber)}></input>
@@ -115,18 +114,18 @@ export default function App()  {
         <button className="buttonStyle" onClick={() => {CalculateApi(operator)}}>Calculate</button>
       </div>
       <div className="divTableStyle">
-      <table className="tableStyle">
-        <tbody>
-          {listExerciseCalculator.map((item: Calculator, i: number) => (
-              <tr className="tableStyle" key={i}>
-              <td className="tableStyle">{item.number1} {item.operator} {item.number2} = {item.result}</td>
-              <td className="tableStyle"><button className="buttonStyle" onClick={() => updateExercise(i)}>update</button></td>
-              <td className="tableStyle"><button className="buttonStyle" onClick={() => deleteFromList(i)}>delete</button></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button className="buttonStyle" onClick={() => {ClearHistory()}}>Clear History</button>
+        <table className="tableStyle">
+          <tbody>
+            {listExerciseCalculator.map((item: Calculator, i: number) => (
+                <tr className="tableStyle" key={i}>
+                <td className="tableStyle">{item.number1} {item.operator} {item.number2} = {item.result}</td>
+                <td className="tableStyle"><button className="buttonStyle" onClick={() => updateExercise(i)}>update</button></td>
+                <td className="tableStyle"><button className="buttonStyle" onClick={() => deleteFromList(i)}>delete</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button className="buttonStyle" onClick={() => {ClearHistory()}}>Clear History</button>
       </div>
     </div>
   );
