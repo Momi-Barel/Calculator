@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsracardCalculator", "IsracardCalculator\IsracardCalculator.csproj", "{BEEDC782-86BF-435F-B387-996F3C5B8729}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEEDC782-86BF-435F-B387-996F3C5B8729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEEDC782-86BF-435F-B387-996F3C5B8729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEEDC782-86BF-435F-B387-996F3C5B8729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEEDC782-86BF-435F-B387-996F3C5B8729}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55574A5A-2FF3-403C-86D2-EAEC3B73E385}
+	EndGlobalSection
+EndGlobal
